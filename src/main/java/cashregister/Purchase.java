@@ -10,12 +10,12 @@ public class Purchase {
     }
 
     public String asString() {
-        String out = "";
+        StringBuilder out = new StringBuilder();
 
         for (Item item : items) {
-            out += item.getName() + "\t" + item.getPrice() + "\n";
+            out.append(item.getName()).append("\t").append(item.getPrice()).append("\n");
         }
 
-        return out;
+        return out.toString();
     }
 }
