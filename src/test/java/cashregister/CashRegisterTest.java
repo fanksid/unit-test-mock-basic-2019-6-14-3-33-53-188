@@ -31,8 +31,13 @@ public class CashRegisterTest {
     @Test
     public void should_print_the_stub_purchase_when_call_process() {
         //given
+        Item item = new Item("Cola", 1.0);
+        Purchase purchase = new MockPurchase(new Item[]{item});
+        CashRegister register = new CashRegister(new MockPrinter());
         //when
+        register.process(purchase);
         //then
+        Assertions.assertEquals("that's a stub string\n", outContent.toString());
     }
 
     @Test
