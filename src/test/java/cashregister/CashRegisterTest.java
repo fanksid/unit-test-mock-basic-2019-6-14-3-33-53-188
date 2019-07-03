@@ -6,6 +6,11 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class CashRegisterTest {
 
@@ -43,8 +48,16 @@ public class CashRegisterTest {
     @Test
     public void should_verify_with_process_call_with_mockito() {
         //given
+        Purchase purchase = mock(Purchase.class);
+        given(purchase.asString()).willReturn("stub string");
+        Printer printer = mock(Printer.class);
+        willDoNothing().given(printer).print("stub string");
+        CashRegister register = new CashRegister(printer);
         //when
+        register.process(purchase);
         //then
+        verify(purchase).asString();
+        verify(printer).print("stub string");
     }
 
 }
